@@ -1,6 +1,6 @@
 public class Factorial {
 
-    public static int calcWithFor(int num) {
+    public static int factWithFor(int num) {
         int sum = 1;
         for (int i = sum + 1; i <= num; i++) {
             sum *= i;
@@ -8,7 +8,7 @@ public class Factorial {
         return sum;
     }
 
-    public static int calcWithWhile(int num) {
+    public static int factWithWhile(int num) {
         int sum = 1;
         int i = 2;
         while (i <= num) {
@@ -18,8 +18,16 @@ public class Factorial {
         return sum;
     }
 
+    public static int factRecursive(int num) {
+        if (num == 0) {
+            return 1;
+        }
+        return num * factRecursive(num - 1);
+    }
+
     public static void main(String[] args) {
-        System.out.println(calcWithFor(12));
-        System.out.println(calcWithWhile(7));
+        System.out.println(factWithFor(12));
+        System.out.println(factWithWhile(7));
+        System.out.println(factRecursive(5));
     }
 }

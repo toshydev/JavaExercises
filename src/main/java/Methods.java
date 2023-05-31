@@ -1,7 +1,9 @@
+package org.example.project;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Methods1 {
+public class Methods {
     public static int sum(int a, int b) {
         return a + b;
     }
@@ -12,6 +14,22 @@ public class Methods1 {
 
     public static boolean gt100(int a, int b) {
         return (a > 100 || b > 100);
+    }
+
+    public static boolean smallerThanZero(int a) {
+        return (a < 0);
+    }
+
+    public static int sumSquareOrSubstract(int a, int b, boolean subtract) {
+        if (subtract) {
+            return b - a;
+        }
+        if (a > b) {
+            return a + b;
+        }
+        else {
+            return a * b;
+        }
     }
 
     public static void inputSum() {
