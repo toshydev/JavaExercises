@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,7 +44,7 @@ public class Intermediate {
 
     }
     public static void main(String[] args) {
-        //printNumsMod3Mod5();
+        printNumsMod3Mod5();
         wordCollector();
     }
 }
