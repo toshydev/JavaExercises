@@ -1,3 +1,5 @@
+package org.example;
+
 public class Factorial {
 
     public static int factWithFor(int num) {

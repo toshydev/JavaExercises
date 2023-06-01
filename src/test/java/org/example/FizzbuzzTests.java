@@ -1,4 +1,6 @@
-import static org.example.project.Fizzbuzz.*;
+package org.example;
+
+import static org.example.Fizzbuzz.fizzbuzz;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;

@@ -1,4 +1,4 @@
-package org.example.project;
+package org.example;
 
 public class Fizzbuzz {
     public static String fizzbuzz(int num) {

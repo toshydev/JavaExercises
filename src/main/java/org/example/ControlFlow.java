@@ -1,3 +1,5 @@
+package org.example;
+
 public class ControlFlow {
     public static String tooManyPeople(int count, String alarm) {
         int people_MAX = switch (alarm) {

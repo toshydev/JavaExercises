@@ -1,3 +1,5 @@
+package org.example;
+
 public class StringMethods {
     public static boolean longerThan20(String string) {
         return string.length() > 20;
