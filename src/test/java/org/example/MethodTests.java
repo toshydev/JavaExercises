@@ -28,7 +28,7 @@ public class MethodTests {
             }
     )
     void checksGt100(int a, int b, boolean expected) {
-        assertTrue(Methods.gt100(a, b));
+        assertEquals(expected, Methods.gt100(a, b));
 
     }
     @ParameterizedTest
