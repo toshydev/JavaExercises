@@ -1,5 +1,10 @@
 package org.example;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class Intermediate {
     public static String getNumString(int number) {
         String[] numStrings = {"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"};
@@ -22,7 +27,25 @@ public class Intermediate {
             }
         }
     }
-    public static void main(String[] args) {
 
+    public static void wordCollector() {
+        Scanner scanner = new Scanner(System.in);
+        List<String> words = new ArrayList<>();
+        while (true) {
+            for(String word : words) {
+                System.out.println(word);
+            }
+            System.out.println("Enter a word or quit with [/q]:");
+            String newWord = scanner.nextLine();
+            words.add(newWord);
+            if (newWord.equals("/q")) {
+                break;
+            }
+        }
+
+    }
+    public static void main(String[] args) {
+        //printNumsMod3Mod5();
+        wordCollector();
     }
 }
