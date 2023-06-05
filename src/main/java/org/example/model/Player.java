@@ -11,7 +11,7 @@ public class Player {
     public String playerName;                       // e.g. Dragonlord
     public static final boolean IS_NPC = false;     // Players never not 'Non-Playable-Characters'
     public int hitPoints;                           // all PLayers have hitPoints
-    private String[] inventory;                     // all Players have an inventory which is private
+    private Inventory inventory;                     // all Players have an inventory which is private
     public boolean isAlive;                         // all Players can be alive or not alive
     public final UUID id;                           // all Players have an id
 
@@ -20,8 +20,8 @@ public class Player {
     public Player(String playerName) {
         this.playerName = playerName;               // playerName is passed to the constructor
         this.hitPoints = 100;                       // hitPoints will be 100 as default
-        this.inventory = new String[1];             // every Player starts with an inventory
-        this.inventory[0] = "Health Potion";        // every Player gets one 'Health Potion'
+        this.inventory = new Inventory();             // every Player starts with an inventory
+        this.inventory.add(new Potion("Health Potion", 25));        // every Player gets one 'Health Potion'
         this.isAlive = true;                        // every Player starts with isAlive = true
         this.id = UUID.randomUUID();                // every Player gets a unique id
     }
@@ -32,31 +32,24 @@ public class Player {
         this.hitPoints = hitPoints;                 // hitPoints will be 100 as default
     }
 
-    // The inventory is private. To see what's in the player's inventory, we need a getter method
-    public String getInventory() {
-        return Arrays.toString(inventory);
-    }
-
-    // The player can pick up an item and add it to the inventory with this method like a setter method
-    public void collect(String item) {
-        String[] newInventory = new String[inventory.length + 1];
-        System.arraycopy(inventory, 0, newInventory, 0, inventory.length);
-        newInventory[newInventory.length - 1] = item;
-        inventory = newInventory;
+    public void collect(Item item) {
+        this.inventory.add(item);
+        System.out.printf("%s picked up a %s%n", playerName, item);
     }
 
     // The player can use an item from the inventory after which the item is deleted from the inventory array
-    public void use(String item) {
-        System.out.printf("%s used a %s%n", playerName, item);
-        String[] newInventory = new String[inventory.length - 1];
-        for (int i = 0; i < newInventory.length; i++) {
-            for (String s : inventory) {
-                if (!s.equals(item)) {
-                    newInventory[i] = s;
-                }
+    public void use(Item item) {
+        if (item.usable) {
+            System.out.printf("%s used a %s%n", playerName, item);
+            if (item.type == Type.POTION) {
+                Potion potion = (Potion) item;
+                System.out.printf("HP -> %d%n", potion.hpChange);
+                this.hitPoints += potion.hpChange;
             }
+            this.inventory.remove(item);
+        } else {
+            System.out.printf("%s is not usable!", item);
         }
-        inventory = newInventory;
     }
 
     // Print Player infos to the console
@@ -82,18 +75,22 @@ public class Player {
 
     public static void main(String[] args) {
         // We create a normal player with standard hitpoints called Dragonlorg
-        Player newPlayer = new Player("Dragonlord");
+        Player newPlayer = new Player("Dragonlord", 50);
 
         // This player is created with 150 hitpoints, cheater...
         Player epicPlayer = new Player("lvl99Player", 150);
         System.out.println(newPlayer);
         System.out.println(epicPlayer);
         System.out.println("newPlayers inventory: ");
-        System.out.println(newPlayer.getInventory());
+        System.out.println(newPlayer.inventory);
         System.out.println("newPlayers inventory after collecting a sword: ");
-        newPlayer.collect("Sword");
-        System.out.println(newPlayer.getInventory());
-        newPlayer.use("Health Potion");
-        System.out.println(newPlayer.getInventory());
+        Item sword = new Item("Rusty sword", Type.WEAPON);
+        newPlayer.collect(sword);
+        System.out.println(newPlayer.inventory);
+        Item hpPotion = new Potion("Health Potion", 25);
+        System.out.println(newPlayer.inventory);
+        newPlayer.use(hpPotion);
+        System.out.println(newPlayer.inventory);
+        System.out.println(newPlayer);
     }
 }
