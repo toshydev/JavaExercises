@@ -5,16 +5,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-    public Student testStudent = new Student(42, "Monty", "Python", "Spam");
-
-    @Test
-    void getAge() {
-        assertEquals(42, testStudent.getAge());
-    }
+    public Student testStudent = new Student("Monty", "Spam");
 
     @Test
     void getName() {
-        assertEquals("Monty Python", testStudent.getName());
+        assertEquals("Monty", testStudent.getName());
     }
 
     @Test
@@ -22,11 +17,6 @@ class StudentTest {
         assertEquals("Spam", testStudent.getCourse());
     }
 
-    @Test
-    void setAge() {
-        testStudent.setAge(111);
-        assertEquals(111, testStudent.getAge());
-    }
 
     @Test
     void setCourse() {
@@ -36,7 +26,7 @@ class StudentTest {
 
     @Test
     void testEquals() {
-        Student newStudent = new Student(42, "Monty", "Python", "Spam");
-        assertTrue(testStudent.equals(newStudent));
+        Student newStudent = new Student("Monty", "Spam");
+        assertFalse(testStudent.equals(newStudent));
     }
 }

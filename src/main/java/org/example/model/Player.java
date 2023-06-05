@@ -18,7 +18,7 @@ public class Player {
     // How to create(or instantiate) a player object
     // This constructor only needs a name to instantiate a player
     public Player(String playerName) {
-        this.playerName = playerName;
+        this.playerName = playerName;               // playerName is passed to the constructor
         this.hitPoints = 100;                       // hitPoints will be 100 as default
         this.inventory = new String[1];             // every Player starts with an inventory
         this.inventory[0] = "Health Potion";        // every Player gets one 'Health Potion'
@@ -65,6 +65,7 @@ public class Player {
         return String.format("Name: %s%nHP: %d%nAlive: %b", playerName, hitPoints, isAlive);
     }
 
+    // When comparing two players, compare the id only. playerNames are not unique but ids are
     @Override
     public boolean equals(Object otherObj) {
         if (this == otherObj) return true;
@@ -73,6 +74,7 @@ public class Player {
         return Objects.equals(id, player.id);
     }
 
+    // Only the player id is hashed, the rest will not be compared
     @Override
     public int hashCode() {
         return Objects.hash(id);
@@ -84,7 +86,6 @@ public class Player {
 
         // This player is created with 150 hitpoints, cheater...
         Player epicPlayer = new Player("lvl99Player", 150);
-        Player epicPlayer2 = new Player("lvl99Player", 150);
         System.out.println(newPlayer);
         System.out.println(epicPlayer);
         System.out.println("newPlayers inventory: ");

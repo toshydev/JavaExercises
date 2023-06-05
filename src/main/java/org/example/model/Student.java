@@ -1,45 +1,29 @@
 package org.example.model;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Student {
-    private int age;
-    final String firstName;
-    final String lastName;
+    final String name;
     private String course;
+    public UUID id;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(age, firstName, lastName, course);
+    public Student(String name) {
+        this.name = name;
+        this.id = UUID.randomUUID();
     }
 
-    public Student(int age, String first, String last) {
-        this.age = age;
-        this.firstName = first;
-        this.lastName = last;
-    }
-
-    public Student(int age, String first, String last, String course) {
-        this.age = age;
-        this.firstName = first;
-        this.lastName = last;
+    public Student(String name, String course) {
+        this(name);
         this.course = course;
     }
 
-    public int getAge() {
-        return this.age;
-    }
-
     public String getName() {
-        return String.format("%s %s", this.firstName, this.lastName);
+        return this.name;
     }
 
     public String getCourse() {
         return this.course;
-    }
-
-    public void setAge(int newAge) {
-        this.age = newAge;
     }
 
     public void setCourse(String courseName) {
@@ -47,27 +31,22 @@ public class Student {
     }
 
     @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other == null) {
-            return false;
-        }
-        if (this.getClass() != other.getClass()) {
-            return false;
-        }
-        Student otherStudent = (Student) other;
-        return (this.getAge() == otherStudent.getAge() && (this.getName().equals(otherStudent.getName())) && (this.getCourse().equals(otherStudent.getCourse())));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(name, student.name) && Objects.equals(course, student.course) && Objects.equals(id, student.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, course, id);
     }
 
     public String toString() {
-        return String.format("Name: %s %s%nAge: %d%nCourse: %s", this.firstName, this.lastName, this.age, this.course);
+        return String.format("Name: %s%nCourse: %s", this.name, this.course);
     }
 
     public static void main(String[] args) {
-        Student anton = new Student(33, "Anton", "Roters", "CS");
-        Student clone = new Student(33, "Anton", "Roters", "CS");
-        System.out.println(anton.equals(clone));
     }
 }
