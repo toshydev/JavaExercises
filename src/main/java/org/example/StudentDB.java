@@ -62,17 +62,4 @@ public class StudentDB {
     public String toString() {
         return Arrays.toString(students);
     }
-
-
-    public static void main(String[] args) {
-        Student anton = new Student("Anton", "Computer Science");
-        Student josh = new Student("Josh", "Crypto");
-        Student enrico = new Student("Enrico", "Game Development");
-        Student sahed = new Student("Sahed", "Fintech");
-        StudentDB newDB = new StudentDB(anton, josh, enrico, sahed);
-        System.out.println(newDB);
-        System.out.println("------------");
-        newDB.remove(sahed);
-        System.out.println(newDB);
-    }
 }

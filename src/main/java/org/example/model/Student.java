@@ -46,7 +46,4 @@ public class Student {
     public String toString() {
         return String.format("Name: %s%nCourse: %s", this.name, this.course);
     }
-
-    public static void main(String[] args) {
-    }
 }
