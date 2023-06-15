@@ -2,7 +2,8 @@ package org.example.model;
 
 import java.util.Objects;
 
-public class Person {
+public abstract class Person {
+    public String address;
     public final String name;
     private int age;
 
@@ -23,6 +24,10 @@ public class Person {
 
     public String getName() {
         return name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override

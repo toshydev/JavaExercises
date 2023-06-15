@@ -1,65 +1,54 @@
 package org.example;
 
+import org.example.exceptions.StudentException;
+import org.example.model.ComputerScienceStudent;
 import org.example.model.Student;
 
-import java.util.Arrays;
-import java.util.Random;
+import java.util.*;
 
 public class StudentDB {
-    private Student[] students;
+    private HashMap<String, Student> students;
 
     public StudentDB() {
-        students = new Student[0];
+        students = new HashMap<>();
     }
 
-    public StudentDB(Student... studentArray) {
+    public StudentDB(List<Student> studentList) {
         this();
-        for (Student student : studentArray) {
+        for (Student student : studentList) {
             this.add(student);
         }
     }
 
     public void add(Student studentToAdd) {
-        Student[] newStudents = new Student[students.length + 1];
-        System.arraycopy(students, 0, newStudents, 0, students.length);
-        newStudents[students.length] = studentToAdd;
-        students = newStudents;
+        students.put(studentToAdd.getId().toString(), studentToAdd);
     }
 
     public void remove(Student studentToRemove) {
-        Student[] newStudents = new Student[students.length - 1];
-        int idx = 0;
-        while (idx < newStudents.length) {
-            for (Student student : students) {
-                if (!student.equals(studentToRemove)) {
-                    newStudents[idx] = student;
-                    idx++;
-                }
-            }
-        }
-        students = newStudents;
+        students.remove(studentToRemove.getName());
     }
 
-    public Student[] getAllStudents() {
-        return students;
+    public ArrayList<Student> getAllStudents() {
+        return new ArrayList<>(students.values());
     }
 
     public Student randomStudent() {
         Random rand = new Random();
-        int randomIdx = rand.nextInt(students.length);
-        return students[randomIdx];
+        int randomIdx = rand.nextInt(students.size());
+        return (Student) students.values().toArray()[randomIdx];
     }
-
-    /* Alternatively:
-    public Student randomStudent() {
-        double random = Math.random() * students.length;
-        int randIdx = (int) random;
-        return students[randIdx];
-    }
-     */
 
     @Override
     public String toString() {
-        return Arrays.toString(students);
+        return "StudentDB{" +
+                "students=" + students +
+                '}';
+    }
+
+    public Student findById(String id) {
+        if (!students.containsKey(id)) {
+            throw new StudentException();
+        }
+        return students.get(id);
     }
 }

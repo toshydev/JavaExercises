@@ -1,11 +1,10 @@
 package org.example.model;
 
-import java.util.Objects;
 import java.util.UUID;
 
-public class Student extends Person {
+public abstract class Student extends Person {
     private String course;
-    public UUID id;
+    private UUID id;
 
     public Student(String name) {
         super(name);
@@ -17,9 +16,11 @@ public class Student extends Person {
         this.course = course;
     }
 
-    public String getCourse() {
-        return this.course;
+    public UUID getId() {
+        return this.id;
     }
+
+    public abstract String getCourse();
 
     public void setCourse(String courseName) {
         this.course = courseName;
@@ -27,9 +28,14 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "course='" + course + '\'' +
+        return "Student{" + this.getName() +
+                ", course='" + course + '\'' +
                 ", id=" + id +
                 '}';
+    }
+
+    public static void main(String[] args) {
+        Student kohei = new ComputerScienceStudent("Kohei", "Game Development");
+        System.out.println(kohei);
     }
 }
