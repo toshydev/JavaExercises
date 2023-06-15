@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentTest {
-    public Student testStudent = new Student("Monty", "Spam");
+    public Student testStudent = new BiologyStudent("Monty", "Spam");
 
     @Test
     void getName() {
@@ -26,7 +26,7 @@ class StudentTest {
 
     @Test
     void testEquals() {
-        Student newStudent = new Student("Monty", "Spam");
-        assertFalse(testStudent.equals(newStudent));
+        Student newStudent = new BiologyStudent("Monty", "Spam");
+        assertNotEquals(testStudent, newStudent);
     }
 }

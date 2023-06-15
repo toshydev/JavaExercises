@@ -1,15 +1,13 @@
 package org.example.model;
 
-import java.util.Objects;
 import java.util.UUID;
 
-public class Student {
-    final String name;
+public abstract class Student extends Person {
     private String course;
-    public UUID id;
+    private UUID id;
 
     public Student(String name) {
-        this.name = name;
+        super(name);
         this.id = UUID.randomUUID();
     }
 
@@ -18,32 +16,26 @@ public class Student {
         this.course = course;
     }
 
-    public String getName() {
-        return this.name;
+    public UUID getId() {
+        return this.id;
     }
 
-    public String getCourse() {
-        return this.course;
-    }
+    public abstract String getCourse();
 
     public void setCourse(String courseName) {
         this.course = courseName;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Student student = (Student) o;
-        return Objects.equals(name, student.name) && Objects.equals(course, student.course) && Objects.equals(id, student.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, course, id);
-    }
-
     public String toString() {
-        return String.format("Name: %s%nCourse: %s", this.name, this.course);
+        return "Student{" + this.getName() +
+                ", course='" + course + '\'' +
+                ", id=" + id +
+                '}';
+    }
+
+    public static void main(String[] args) {
+        Student kohei = new ComputerScienceStudent("Kohei", "Game Development");
+        System.out.println(kohei);
     }
 }
