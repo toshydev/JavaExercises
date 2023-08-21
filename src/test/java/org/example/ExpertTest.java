@@ -11,6 +11,9 @@ class ExpertTest {
     void returnsArray_whenCalled() {
         String[] testArray = {"T", "o", "s", "h", "y"};
         assertArrayEquals(testArray, Expert.stringToArray("T,o,s,h,y"));
+        String str = "";
+        str.repeat(2);
+        System.out.println(str.repeat(2));
     }
 
     @ParameterizedTest
